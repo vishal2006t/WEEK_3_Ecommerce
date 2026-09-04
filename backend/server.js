@@ -177,8 +177,15 @@ async function startServer(portToTry) {
   console.log('   🔥 DEVILCART - SHOP BEYOND THE ORDINARY 🔥   ');
   console.log('----------------------------------------------------');
 
-  // Attempt database connection test
-  await db.testConnection();
+  // Attempt database connection test and safe auto-initialization
+  const isConnected = await db.testConnection();
+  if (isConnected) {
+    try {
+      await db.initDatabase();
+    } catch (initErr) {
+      console.warn(`[Auto-Init Info] ${initErr.message}`);
+    }
+  }
 
   const server = http.createServer(app);
 

@@ -594,23 +594,26 @@ function executeMemoryQuery(sql, params) {
  */
 async function initDatabase() {
   try {
-    const connConfig = {
-      host: DB_HOST,
-      port: DB_PORT,
-      user: DB_USER,
-      password: DB_PASSWORD
-    };
-    if (DB_SSL) {
-      connConfig.ssl = { rejectUnauthorized: false };
+    try {
+      const connConfig = {
+        host: DB_HOST,
+        port: DB_PORT,
+        user: DB_USER,
+        password: DB_PASSWORD
+      };
+      if (DB_SSL) {
+        connConfig.ssl = { rejectUnauthorized: false };
+      }
+      const rootConnection = await mysql.createConnection(connConfig);
+      await rootConnection.query(
+        `CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`
+      );
+      await rootConnection.end();
+    } catch (dbCreateErr) {
+      // Non-fatal on managed cloud databases where database is pre-created (e.g. Railway, PlanetScale)
     }
-    const rootConnection = await mysql.createConnection(connConfig);
 
-    await rootConnection.query(
-      `CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`
-    );
-    await rootConnection.end();
-
-    // Re-test connection pool
+    // Test connection pool
     const connected = await testConnection();
     if (!connected) return false;
 

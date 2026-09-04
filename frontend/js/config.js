@@ -14,8 +14,7 @@
 
 const DEVILCART_CONFIG = {
   // Configurable production backend API base URL
-  // Replace 'https://YOUR-RENDER-BACKEND-URL.onrender.com/api' with your deployed Render URL
-  BACKEND_PROD_URL: 'https://YOUR-RENDER-BACKEND-URL.onrender.com/api'
+  BACKEND_PROD_URL: 'https://devilcart-backend.onrender.com/api'
 };
 
 /**

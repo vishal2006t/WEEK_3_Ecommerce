@@ -12,7 +12,7 @@ const API_BASE = (typeof window !== 'undefined' && typeof window.getApiBaseUrl =
         if (window.location.port === '5000') return '/api';
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return 'http://localhost:5000/api';
       }
-      return 'https://YOUR-RENDER-BACKEND-URL.onrender.com/api';
+      return 'https://devilcart-backend.onrender.com/api';
     })();
 
 // Indian Rupee (₹) Currency Formatter
