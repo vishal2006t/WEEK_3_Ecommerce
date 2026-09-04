@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details — DevilCart India | Shop Beyond the Ordinary</title>
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <span>
+      <i class="fa-solid fa-fire"></i>
+      MEGA FESTIVE DROP &bull; Use Code <span class="announcement-code">DEVIL20</span> for 20% Off &bull; Free Delivery above ₹999
+      <i class="fa-solid fa-fire"></i>
+    </span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="brand-logo" id="brandLogo">
+        <div class="brand-icon"><i class="fa-solid fa-skull"></i></div>
+        <div class="brand-text">Devil<span>Cart</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#products-section" class="nav-link">Products</a></li>
+          <li><a href="cart.html" class="nav-link">Cart</a></li>
+          <li><a href="checkout.html" class="nav-link">Checkout</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="action-btn" title="View Shopping Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge" id="navCartCount">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="product-detail-section">
+      <div class="container">
+        
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumb-nav">
+          <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="index.html#products-section">Catalog</a>
+          <span class="breadcrumb-separator">/</span>
+          <span id="breadcrumbCategory">Category</span>
+          <span class="breadcrumb-separator">/</span>
+          <span id="breadcrumbProduct" style="color: var(--text-primary);">Product Name</span>
+        </div>
+
+        <!-- Product Details Container -->
+        <div id="productDetailContainer">
+          <!-- Dynamic Content Loaded by product.js -->
+          <div class="loading-spinner-wrap">
+            <div class="devil-spinner"></div>
+            <p>Fetching product details from database...</p>
+          </div>
+        </div>
+
+        <!-- Related Products Section -->
+        <div class="related-section" id="relatedSection" style="margin-top: 5rem; display: none;">
+          <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+            <span class="section-subtitle">SIMILAR PRODUCTS</span>
+            <h3 class="section-title" style="font-size: 1.8rem;">You May Also Like</h3>
+          </div>
+          <div class="product-grid" id="relatedGrid"></div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding-top: 0;">
+        <p>&copy; 2026 DevilCart India. All Rights Reserved. &bull; Tagline: <em>Shop Beyond the Ordinary.</em> (Prices in INR ₹)</p>
+        <p><a href="index.html" style="color: var(--accent-hover);"><i class="fa-solid fa-arrow-left"></i> Back to Products</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/product.js"></script>
+</body>
+</html>

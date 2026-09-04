@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — DevilCart India | Shop Beyond the Ordinary</title>
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <span>
+      <i class="fa-solid fa-lock"></i>
+      100% Secure 256-Bit SSL Encrypted Indian Payment Gateway
+    </span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="brand-logo" id="brandLogo">
+        <div class="brand-icon"><i class="fa-solid fa-skull"></i></div>
+        <div class="brand-text">Devil<span>Cart</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#products-section" class="nav-link">Products</a></li>
+          <li><a href="cart.html" class="nav-link">Cart</a></li>
+          <li><a href="checkout.html" class="nav-link active">Checkout</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="action-btn" title="View Shopping Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge" id="navCartCount">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="checkout-section">
+      <div class="container">
+        
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumb-nav">
+          <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="cart.html">Cart</a>
+          <span class="breadcrumb-separator">/</span>
+          <span style="color: var(--text-primary);">Checkout</span>
+        </div>
+
+        <div class="section-header" style="text-align: left; margin-bottom: 2.5rem;">
+          <span class="section-subtitle">SECURE ORDER DETAILS</span>
+          <h2 class="section-title">Delivery &amp; Payment</h2>
+        </div>
+
+        <div class="checkout-grid">
+          
+          <!-- Left Column: Checkout Billing Form -->
+          <div class="checkout-form-card">
+            <form id="checkoutForm" novalidate>
+              
+              <!-- Contact Information -->
+              <h3 class="form-section-title">
+                <i class="fa-solid fa-user-check"></i> Customer Contact Details
+              </h3>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fullName" class="form-label">Full Name <span class="req">*</span></label>
+                  <input type="text" id="fullName" name="name" class="form-control" placeholder="e.g. Rahul Sharma" required>
+                  <span class="form-error-msg">Please enter your full name.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="email" class="form-label">Email Address <span class="req">*</span></label>
+                  <input type="email" id="email" name="email" class="form-control" placeholder="rahul.sharma@gmail.com" required>
+                  <span class="form-error-msg">Please enter a valid email address.</span>
+                </div>
+              </div>
+
+              <div class="form-row single">
+                <div class="form-group">
+                  <label for="phone" class="form-label">Mobile Phone (10 digits) <span class="req">*</span></label>
+                  <input type="tel" id="phone" name="phone" class="form-control" placeholder="+91 98765 43210" required>
+                  <span class="form-error-msg">Please enter a valid 10-digit mobile number.</span>
+                </div>
+              </div>
+
+              <!-- Shipping Destination -->
+              <h3 class="form-section-title" style="margin-top: 2rem;">
+                <i class="fa-solid fa-location-dot"></i> Delivery Address in India
+              </h3>
+
+              <div class="form-row single">
+                <div class="form-group">
+                  <label for="address" class="form-label">Flat / House No. / Street Address <span class="req">*</span></label>
+                  <input type="text" id="address" name="address" class="form-control" placeholder="Flat 402, Royal Palms, MG Road" required>
+                  <span class="form-error-msg">Street address is required for delivery.</span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="city" class="form-label">City / District <span class="req">*</span></label>
+                  <input type="text" id="city" name="city" class="form-control" placeholder="Bengaluru / Mumbai / Delhi" required>
+                  <span class="form-error-msg">City name is required.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="pincode" class="form-label">6-Digit Pincode <span class="req">*</span></label>
+                  <input type="text" id="pincode" name="pincode" class="form-control" placeholder="560001" maxlength="6" required>
+                  <span class="form-error-msg">Please enter a valid 6-digit postal pincode.</span>
+                </div>
+              </div>
+
+              <!-- Payment Method Selection -->
+              <h3 class="form-section-title" style="margin-top: 2rem;">
+                <i class="fa-solid fa-indian-rupee-sign"></i> Select Payment Method
+              </h3>
+
+              <div class="payment-methods-grid">
+                <div class="payment-method-card selected" data-method="UPI / Google Pay / PhonePe">
+                  <i class="fa-solid fa-mobile-screen-button"></i>
+                  <span>UPI / GPay / PhonePe</span>
+                </div>
+                <div class="payment-method-card" data-method="Credit / Debit Card">
+                  <i class="fa-solid fa-credit-card"></i>
+                  <span>Credit / Debit Card</span>
+                </div>
+                <div class="payment-method-card" data-method="Cash On Delivery">
+                  <i class="fa-solid fa-hand-holding-dollar"></i>
+                  <span>Cash On Delivery</span>
+                </div>
+              </div>
+              <input type="hidden" id="selectedPaymentMethod" value="UPI / Google Pay / PhonePe">
+
+              <button type="submit" class="btn-primary" id="placeOrderBtn" style="width: 100%; padding: 1.15rem; font-size: 1.1rem; margin-top: 1rem;">
+                <i class="fa-solid fa-check"></i> Place Order (Pay on Delivery / UPI)
+              </button>
+            </form>
+          </div>
+
+          <!-- Right Column: Sticky Order Summary -->
+          <div class="checkout-summary-wrap">
+            <div class="summary-card" id="checkoutSummaryCard">
+              <h3>Order Summary</h3>
+              
+              <!-- Itemized list container -->
+              <div id="checkoutItemList" style="max-height: 280px; overflow-y: auto; margin-bottom: 1.25rem; padding-right: 0.5rem;">
+                <!-- Filled dynamically via checkout.js -->
+              </div>
+
+              <div class="summary-divider"></div>
+
+              <div class="summary-line">
+                <span>Subtotal</span>
+                <span id="summarySubtotal">₹0</span>
+              </div>
+
+              <div class="summary-line discount-line" id="discountRow" style="display: none;">
+                <span>Coupon Discount</span>
+                <span id="summaryDiscount">-₹0</span>
+              </div>
+
+              <div class="summary-line">
+                <span>Delivery Charges</span>
+                <span id="summaryShipping">₹0</span>
+              </div>
+
+              <div class="summary-divider"></div>
+
+              <div class="summary-total">
+                <span>Total Payable</span>
+                <span class="summary-total-val" id="summaryTotal">₹0</span>
+              </div>
+
+              <div style="font-size: 0.78rem; color: var(--text-muted); text-align: center;">
+                <i class="fa-solid fa-shield-halved" style="color: var(--accent-hover);"></i>
+                GST invoices included &bull; 100% Safe and Dispatched with Care.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding-top: 0;">
+        <p>&copy; 2026 DevilCart India. All Rights Reserved. &bull; Tagline: <em>Shop Beyond the Ordinary.</em> (Prices in INR ₹)</p>
+        <p><a href="cart.html" style="color: var(--accent-hover);"><i class="fa-solid fa-arrow-left"></i> Return to Cart</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/checkout.js"></script>
+</body>
+</html>

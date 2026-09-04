@@ -1,0 +1,19 @@
+{
+  "name": "devilcart",
+  "version": "1.0.0",
+  "description": "DevilCart - Full Stack Dark Devil Academia E-Commerce Platform",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "init-db": "node backend/initDb.js",
+    "verify-db": "node backend/verify_mysql.js",
+    "postinstall": "cd backend && npm install"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.10.1"
+  }
+}

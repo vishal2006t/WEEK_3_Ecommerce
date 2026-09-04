@@ -1,0 +1,28 @@
+{
+  "name": "devilcart-backend",
+  "version": "1.0.0",
+  "description": "Full-stack Dark Devil Academia E-Commerce backend powered by Node.js, Express, and MySQL.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "init-db": "node initDb.js",
+    "verify-db": "node verify_mysql.js"
+  },
+  "keywords": [
+    "devilcart",
+    "ecommerce",
+    "express",
+    "mysql",
+    "dark-academia"
+  ],
+  "author": "DevilCart Dev Team",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.10.1"
+  }
+}

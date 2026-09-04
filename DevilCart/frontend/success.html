@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmed — DevilCart India | Shop Beyond the Ordinary</title>
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <span>
+      <i class="fa-solid fa-check"></i>
+      Order Confirmed &bull; Preparing for Nationwide Express Delivery across India
+    </span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="brand-logo" id="brandLogo">
+        <div class="brand-icon"><i class="fa-solid fa-skull"></i></div>
+        <div class="brand-text">Devil<span>Cart</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#products-section" class="nav-link">Products</a></li>
+          <li><a href="cart.html" class="nav-link">Cart</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="action-btn" title="View Shopping Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge" id="navCartCount">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="success-section">
+      <div class="container">
+        
+        <div class="success-card">
+          <!-- Animated Seal Icon -->
+          <div class="success-seal-wrap">
+            <i class="fa-solid fa-check"></i>
+          </div>
+
+          <h2>Order Placed Successfully!</h2>
+          <p class="success-tagline" id="successCustomerGreeting">
+            Thank you for shopping at DevilCart India! Your order has been registered and is being prepared for dispatch.
+          </p>
+
+          <div>
+            <span style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.35rem;">TRACKING / ORDER ID</span>
+            <div class="order-code-badge" id="displayOrderCode">DEVIL-XXXXX</div>
+          </div>
+
+          <!-- Order Summary Details Box -->
+          <div class="success-details-box">
+            <div class="success-detail-row">
+              <span>Order Status</span>
+              <span style="color: #34d399; font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Confirmed &bull; Preparing Dispatch</span>
+            </div>
+            <div class="success-detail-row">
+              <span>Payment Mode</span>
+              <span id="displayPaymentMethod">UPI / Online</span>
+            </div>
+            <div class="success-detail-row">
+              <span>Customer Name</span>
+              <span id="displayName">Customer</span>
+            </div>
+            <div class="success-detail-row">
+              <span>Delivery Address</span>
+              <span id="displayDestination">City, Pincode</span>
+            </div>
+            <div class="success-detail-row">
+              <span>Total Amount Paid / Payable</span>
+              <span style="color: var(--accent-hover); font-weight: 800;" id="displayTotalAmount">₹0</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="success-actions">
+            <a href="index.html" class="btn-primary">
+              <i class="fa-solid fa-shop"></i> Continue Shopping
+            </a>
+            <button type="button" class="btn-secondary" onclick="window.print()">
+              <i class="fa-solid fa-print"></i> Print GST Invoice
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border: none; padding-top: 0;">
+        <p>&copy; 2026 DevilCart India. All Rights Reserved. &bull; Tagline: <em>Shop Beyond the Ordinary.</em></p>
+        <p><a href="index.html" style="color: var(--accent-hover);"><i class="fa-solid fa-house"></i> Return to Home</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function formatINR(amount) {
+      const num = Number(amount) || 0;
+      return '₹' + num.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Clear Cart after successful order
+      localStorage.removeItem('devilcart_cart');
+      localStorage.removeItem('devilcart_promo');
+
+      const params = new URLSearchParams(window.location.search);
+      const urlOrderCode = params.get('orderId') || params.get('orderCode');
+      const storedOrder = localStorage.getItem('devilcart_last_order');
+
+      let orderData = null;
+      if (storedOrder) {
+        try {
+          orderData = JSON.parse(storedOrder);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      const orderCode = urlOrderCode || (orderData && orderData.orderCode) || 'DEVIL-' + Math.floor(10000 + Math.random() * 90000);
+      const totalAmount = (orderData && orderData.totalAmount) ? formatINR(orderData.totalAmount) : '₹1,499';
+      const customerName = (orderData && orderData.customer && orderData.customer.name) || 'Valued Customer';
+      const destination = (orderData && orderData.customer) ? `${orderData.customer.address}, ${orderData.customer.city} - ${orderData.customer.pincode}` : 'Registered Address';
+      const paymentMethod = (orderData && orderData.paymentMethod) || 'UPI / Cash on Delivery';
+
+      document.getElementById('displayOrderCode').textContent = orderCode;
+      document.getElementById('displayTotalAmount').textContent = totalAmount;
+      document.getElementById('displayName').textContent = customerName;
+      document.getElementById('displayDestination').textContent = destination;
+      document.getElementById('displayPaymentMethod').textContent = paymentMethod;
+      document.getElementById('successCustomerGreeting').textContent = `Thank you, ${customerName}! Your order has been placed successfully and is being dispatched from the DevilCart warehouse.`;
+    });
+  </script>
+</body>
+</html>

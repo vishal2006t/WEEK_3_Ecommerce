@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevilCart — Shop Beyond the Ordinary | India's Premium Dark E-Commerce</title>
+  <meta name="description" content="DevilCart is India's premium dark academia e-commerce platform offering top fashion, dresses, flagship smartphones, gaming laptops, and high-performance electronics.">
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <span>
+      <i class="fa-solid fa-fire"></i>
+      MEGA FESTIVE DROP &bull; Use Code <span class="announcement-code">DEVIL20</span> for 20% Off &bull; Free Delivery above ₹999
+      <i class="fa-solid fa-fire"></i>
+    </span>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="brand-logo" id="brandLogo">
+        <div class="brand-icon">
+          <i class="fa-solid fa-skull"></i>
+        </div>
+        <div class="brand-text">
+          Devil<span>Cart</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="#products-section" class="nav-link">Products</a></li>
+          <li><a href="#features-section" class="nav-link">Why DevilCart</a></li>
+          <li><a href="cart.html" class="nav-link">Cart</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Live Search Input -->
+        <div class="search-box-header">
+          <i class="fa-solid fa-magnifying-glass search-icon-btn"></i>
+          <input type="text" id="searchInput" class="search-input-header" placeholder="Search products, phones, laptops, dresses..." autocomplete="off">
+        </div>
+
+        <!-- Cart Button with Counter Badge -->
+        <a href="cart.html" class="action-btn" id="cartBtn" title="View Shopping Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-badge" id="navCartCount">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fa-solid fa-bolt"></i> Premium Indian E-Commerce
+          </div>
+          <h1 class="hero-title">
+            Shop Beyond <br>
+            <span class="highlight">The Ordinary.</span>
+          </h1>
+          <p class="hero-tagline">"India's most thrilling shopping experience."</p>
+          <p class="hero-description">
+            Discover the dark aesthetic in modern technology and style. Shop genuine flagship smartphones, powerhouse gaming laptops, premium audio electronics, and designer fashion with nationwide fast delivery across India.
+          </p>
+          <div class="hero-buttons">
+            <a href="#products-section" class="btn-primary" id="exploreVaultBtn">
+              <i class="fa-solid fa-bag-shopping"></i> Explore Collection
+            </a>
+            <a href="#featured-card" class="btn-secondary">
+              <i class="fa-solid fa-star"></i> Featured Deal
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Featured Card Showcase -->
+        <div class="hero-visual" id="featured-card">
+          <div class="hero-card-featured">
+            <div class="hero-image-wrap">
+              <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=800&q=80" alt="Samsung Galaxy S24 Ultra 5G" id="heroFeaturedImg">
+              <span class="hero-float-tag"><i class="fa-solid fa-fire"></i> Best Seller</span>
+            </div>
+            <div class="hero-card-info">
+              <div>
+                <h4>Samsung Galaxy S24 Ultra 5G</h4>
+                <p>Titanium Black &bull; 256GB Storage</p>
+              </div>
+              <div class="hero-card-price">₹1,29,999</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Propositions / Feature Strip -->
+    <section class="features-strip" id="features-section">
+      <div class="container features-grid">
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-truck-fast"></i></div>
+          <div class="feature-text">
+            <h5>Free &amp; Fast Shipping</h5>
+            <p>On all orders above ₹999</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="feature-text">
+            <h5>100% Genuine Brands</h5>
+            <p>Official manufacturer warranty</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-rotate-left"></i></div>
+          <div class="feature-text">
+            <h5>7-Day Easy Returns</h5>
+            <p>Hassle-free instant refund policy</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+          <div class="feature-text">
+            <h5>Cash on Delivery / UPI</h5>
+            <p>Flexible Indian payment options</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">FEATURED CATEGORIES</span>
+          <h2 class="section-title">Trending Catalog</h2>
+          <p class="section-desc">Browse our curated selection of smartphones, laptops, electronics, dresses, and fashion.</p>
+        </div>
+
+        <!-- Filter & Sorting Bar -->
+        <div class="filter-bar-wrapper">
+          <div class="filter-bar">
+            <!-- Category Chips: ALL, FASHION, DRESSES, PHONES, LAPTOPS, ELECTRONICS, ACCESSORIES -->
+            <div class="category-chips" id="categoryChips">
+              <button class="chip-btn active" data-category="All">ALL</button>
+              <button class="chip-btn" data-category="Fashion">FASHION</button>
+              <button class="chip-btn" data-category="Dresses">DRESSES</button>
+              <button class="chip-btn" data-category="Phones">PHONES</button>
+              <button class="chip-btn" data-category="Laptops">LAPTOPS</button>
+              <button class="chip-btn" data-category="Electronics">ELECTRONICS</button>
+              <button class="chip-btn" data-category="Accessories">ACCESSORIES</button>
+            </div>
+
+            <!-- Sort Dropdown -->
+            <div class="filter-controls">
+              <select id="sortSelect" class="filter-select">
+                <option value="default">Sort by: Featured</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Grid Container -->
+        <div class="product-grid" id="productGrid">
+          <!-- Dynamically populated via products.js -->
+          <div class="loading-spinner-wrap">
+            <div class="devil-spinner"></div>
+            <p>Loading DevilCart products from database...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <div class="brand-icon"><i class="fa-solid fa-skull"></i></div>
+            <div class="brand-text">Devil<span>Cart</span></div>
+          </a>
+          <p>
+            DevilCart India — Delivering premium electronics, gaming laptops, flagship smartphones, dresses, and modern fashion to shoppers nationwide.
+          </p>
+          <div class="footer-socials">
+            <a href="#" class="social-link" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-link" title="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="#" class="social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Popular Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#products-section" onclick="filterByCategory('Fashion')">Fashion &amp; Kurtis</a></li>
+            <li><a href="#products-section" onclick="filterByCategory('Dresses')">Party &amp; Maxi Dresses</a></li>
+            <li><a href="#products-section" onclick="filterByCategory('Phones')">5G Mobile Phones</a></li>
+            <li><a href="#products-section" onclick="filterByCategory('Laptops')">Gaming &amp; Work Laptops</a></li>
+            <li><a href="#products-section" onclick="filterByCategory('Electronics')">Audio &amp; Accessories</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="cart.html">View Cart</a></li>
+            <li><a href="checkout.html">Track Order</a></li>
+            <li><a href="#">Shipping &amp; Delivery Policy</a></li>
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Newsletter &amp; Offers</h4>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">
+            Subscribe to get exclusive discount coupons and early access to upcoming flash sales.
+          </p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Subscribed to DevilCart Offers!'); this.reset();">
+            <input type="email" class="newsletter-input" placeholder="Enter your email ID..." required>
+            <button type="submit" class="btn-primary" style="padding: 0.6rem 1rem;">
+              <i class="fa-solid fa-paper-plane"></i> Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 DevilCart India. All Rights Reserved. &bull; Tagline: <em>Shop Beyond the Ordinary.</em> (Prices in INR ₹)</p>
+        <p><i class="fa-solid fa-code"></i> Full-Stack Node.js &bull; Express &bull; MySQL &bull; Vanilla JS</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+</body>
+</html>
