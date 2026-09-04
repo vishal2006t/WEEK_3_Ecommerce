@@ -3,14 +3,16 @@
  * Handles real-time form validation, payment selection, order summary, and API submission in INR.
  */
 
-const API_BASE = (function() {
-  if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-    if (window.location.port === '5000') {
-      return '/api';
-    }
-  }
-  return 'http://localhost:5000/api';
-})();
+// Centralized Configurable API URL (Uses config.js when loaded, with resilient fallback)
+const API_BASE = (typeof window !== 'undefined' && typeof window.getApiBaseUrl === 'function')
+  ? window.getApiBaseUrl()
+  : (function() {
+      if (typeof window !== 'undefined' && window.location) {
+        if (window.location.port === '5000') return '/api';
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return 'http://localhost:5000/api';
+      }
+      return 'https://YOUR-RENDER-BACKEND-URL.onrender.com/api';
+    })();
 
 // Indian Rupee (₹) Currency Formatter
 function formatINR(price) {

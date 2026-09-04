@@ -1,7 +1,7 @@
 /**
- * DevilCart - Full-Stack Express Server Entry Point
+ * DevilCart - Full-Stack Express Server Entry Point (Cloud & Production Ready)
  * Serves REST APIs and statically hosts the frontend application.
- * Includes graceful port conflict handling (EADDRINUSE) and comprehensive error logging.
+ * Supports cloud hosting (Render, Railway, Heroku) with 0.0.0.0 binding and dynamic CORS.
  */
 
 const express = require('express');
@@ -16,7 +16,8 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const app = express();
-let PORT = parseInt(process.env.PORT, 10) || 5000;
+const PORT = parseInt(process.env.PORT, 10) || 5000;
+const HOST = '0.0.0.0';
 
 // Global Unhandled Error Prevention
 process.on('uncaughtException', (err) => {
@@ -27,8 +28,44 @@ process.on('unhandledRejection', (reason, promise) => {
   console.error('⚠ Unhandled Rejection caught gracefully:', reason);
 });
 
-// Middleware
-app.use(cors());
+// Configure CORS for production (Vercel) & local development
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'https://your-vercel-domain.vercel.app',
+  'http://localhost:5000',
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://127.0.0.1:5500',
+  'http://127.0.0.1:5000',
+  'http://localhost:8080'
+].filter(Boolean);
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow non-browser requests (Postman, curl, server-to-server) or same-origin
+    if (!origin) return callback(null, true);
+    
+    // Check if origin is allowed or matches FRONTEND_URL pattern
+    if (
+      process.env.FRONTEND_URL === '*' ||
+      allowedOrigins.includes(origin) ||
+      allowedOrigins.some(allowed => origin.startsWith(allowed)) ||
+      origin.includes('vercel.app') ||
+      origin.includes('localhost') ||
+      origin.includes('127.0.0.1')
+    ) {
+      return callback(null, true);
+    }
+
+    // Default permissive in development/fallback
+    return callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+
+// Body Parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -52,7 +89,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 
-// Bonus: Member Authentication / Profile Routes
+// Member Authentication / Profile Routes
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -77,7 +114,7 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
-// Bonus: Admin Statistics Overview
+// Admin Statistics Overview
 app.get('/api/admin/stats', async (req, res) => {
   try {
     const products = await db.query('SELECT * FROM products');
@@ -90,7 +127,7 @@ app.get('/api/admin/stats', async (req, res) => {
         totalProducts: products.length,
         totalOrders: orders.length,
         totalRevenue: parseFloat(totalRevenue.toFixed(2)),
-        databaseStatus: 'MySQL (ecommerce_db)'
+        databaseStatus: db.getIsConnected() ? `MySQL (${process.env.DB_NAME || 'ecommerce_db'})` : 'Offline / Memory Fallback'
       }
     });
   } catch (error) {
@@ -98,15 +135,19 @@ app.get('/api/admin/stats', async (req, res) => {
   }
 });
 
-// Healthcheck Route
+// Healthcheck Route (Production & Monitoring ready)
 app.get('/api/health', (req, res) => {
+  const isDbConnected = db.getIsConnected();
+  const dbName = process.env.DB_NAME || 'ecommerce_db';
   res.json({
     status: 'online',
     brand: 'DevilCart',
     tagline: 'Shop Beyond the Ordinary.',
     port: PORT,
-    database: 'MySQL (ecommerce_db)',
-    uptime: process.uptime()
+    database: isDbConnected ? `MySQL (${dbName})` : 'Offline / Memory Fallback',
+    databaseStatus: isDbConnected ? 'connected' : 'disconnected',
+    uptime: Math.floor(process.uptime()),
+    timestamp: new Date().toISOString()
   });
 });
 
@@ -130,7 +171,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start Server with Graceful Port Conflict Handling
+// Start Server with Graceful Port Conflict Handling and 0.0.0.0 Host Binding
 async function startServer(portToTry) {
   console.log('----------------------------------------------------');
   console.log('   🔥 DEVILCART - SHOP BEYOND THE ORDINARY 🔥   ');
@@ -146,17 +187,17 @@ async function startServer(portToTry) {
       console.warn(`\x1b[33m⚠ Port ${portToTry} is already in use by another process.\x1b[0m`);
       const nextPort = portToTry + 1;
       console.log(`\x1b[36m⚡ Attempting fallback to port ${nextPort}...\x1b[0m`);
-      PORT = nextPort;
       startServer(nextPort);
     } else {
       console.error('Fatal server socket error:', err);
     }
   });
 
-  server.listen(portToTry, () => {
-    console.log(`\x1b[32m✔ DevilCart Server is running at http://localhost:${portToTry}\x1b[0m`);
-    console.log(`\x1b[36m✔ Frontend available at http://localhost:${portToTry}\x1b[0m`);
-    console.log(`\x1b[35m✔ API Endpoints ready at http://localhost:${portToTry}/api/products\x1b[0m`);
+  server.listen(portToTry, HOST, () => {
+    console.log(`\x1b[32m✔ DevilCart Server is running on ${HOST}:${portToTry}\x1b[0m`);
+    console.log(`\x1b[36m✔ Local access: http://localhost:${portToTry}\x1b[0m`);
+    console.log(`\x1b[35m✔ Health check: http://localhost:${portToTry}/api/health\x1b[0m`);
+    console.log(`\x1b[35m✔ API Endpoints: http://localhost:${portToTry}/api/products\x1b[0m`);
     console.log('----------------------------------------------------');
   });
 }

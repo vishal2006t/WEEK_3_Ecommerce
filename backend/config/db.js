@@ -27,6 +27,9 @@ const DB_PORT = parseInt(process.env.DB_PORT, 10) || 3306;
 const DB_USER = process.env.DB_USER || 'root';
 const DB_PASSWORD = process.env.DB_PASSWORD !== undefined ? process.env.DB_PASSWORD : '';
 const DB_NAME = process.env.DB_NAME || 'ecommerce_db';
+const DB_SSL = process.env.DB_SSL === 'true' || process.env.DB_SSL === '1' ||
+  Boolean(DB_HOST && (DB_HOST.includes('aivencloud') || DB_HOST.includes('clever-cloud') || DB_HOST.includes('planetscale') || DB_HOST.includes('tidbcloud')));
+
 
 // 38 Realistic Indian E-Commerce Products across 6 Categories (5+ per category)
 const initialProducts = [
@@ -434,9 +437,9 @@ const memoryStore = {
 let pool = null;
 let isConnected = false;
 
-// Create MySQL Connection Pool
+// Create MySQL Connection Pool with dynamic configuration
 try {
-  pool = mysql.createPool({
+  const poolOptions = {
     host: DB_HOST,
     port: DB_PORT,
     user: DB_USER,
@@ -447,7 +450,13 @@ try {
     queueLimit: 0,
     enableKeepAlive: true,
     keepAliveInitialDelay: 0
-  });
+  };
+
+  if (DB_SSL) {
+    poolOptions.ssl = { rejectUnauthorized: false };
+  }
+
+  pool = mysql.createPool(poolOptions);
 } catch (err) {
   console.warn(`⚠ Could not instantiate MySQL pool: ${err.message}`);
 }
@@ -585,12 +594,16 @@ function executeMemoryQuery(sql, params) {
  */
 async function initDatabase() {
   try {
-    const rootConnection = await mysql.createConnection({
+    const connConfig = {
       host: DB_HOST,
       port: DB_PORT,
       user: DB_USER,
       password: DB_PASSWORD
-    });
+    };
+    if (DB_SSL) {
+      connConfig.ssl = { rejectUnauthorized: false };
+    }
+    const rootConnection = await mysql.createConnection(connConfig);
 
     await rootConnection.query(
       `CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`

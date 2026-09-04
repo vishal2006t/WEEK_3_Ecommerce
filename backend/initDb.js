@@ -22,6 +22,8 @@ const DB_PORT = parseInt(process.env.DB_PORT, 10) || 3306;
 const DB_USER = process.env.DB_USER || 'root';
 const DB_PASSWORD = process.env.DB_PASSWORD !== undefined ? process.env.DB_PASSWORD : '';
 const DB_NAME = process.env.DB_NAME || 'ecommerce_db';
+const DB_SSL = process.env.DB_SSL === 'true' || process.env.DB_SSL === '1' ||
+  Boolean(DB_HOST && (DB_HOST.includes('aivencloud') || DB_HOST.includes('clever-cloud') || DB_HOST.includes('planetscale') || DB_HOST.includes('tidbcloud')));
 
 async function initDb() {
   console.log('====================================================');
@@ -30,12 +32,16 @@ async function initDb() {
 
   let connection;
   try {
-    connection = await mysql.createConnection({
+    const connConfig = {
       host: DB_HOST,
       port: DB_PORT,
       user: DB_USER,
       password: DB_PASSWORD
-    });
+    };
+    if (DB_SSL) {
+      connConfig.ssl = { rejectUnauthorized: false };
+    }
+    connection = await mysql.createConnection(connConfig);
 
     console.log(`✔ Connected to MySQL on ${DB_HOST}:${DB_PORT}`);
 
